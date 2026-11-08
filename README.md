@@ -11,14 +11,14 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 This project explores which bank customers leave, which profiles, product-holding patterns and behaviours are linked to churn, and which of those associations are statistically meaningful. It also sizes the balances at risk and builds a **leakage-safe model** that ranks customers by churn risk so retention effort can be prioritised.
 
 **Notebook:** [`bank-customers-churn-analysis.ipynb`](bank-customers-churn-analysis.ipynb)
 **Dataset:** [Bank Customer Churn (Kaggle)](https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn) — `Customer-Churn-Records.csv`, 10,000 customers × 18 columns
 
-## 🔑 Headline Results
+## Headline Results
 
 | Metric | Result |
 |---|---|
@@ -29,7 +29,7 @@ This project explores which bank customers leave, which profiles, product-holdin
 | Best model | Random Forest — test **ROC-AUC 0.87**, recall 69%, precision 60% (threshold 0.32) |
 | Top 20% of customers by risk score | contain about **62%** of churners |
 
-## 🔍 Key Findings
+## Key Findings
 
 - **Age:** churn peaks at **46–55 (50.6%)** vs 7.5% at 18–25 — a hump, not a straight line.
 - **Products:** two products is safest (**7.6%** churn) vs 27.7% for one product; customers with 3–4 products churn at 83–100% (only 326 customers).
@@ -39,11 +39,11 @@ This project explores which bank customers leave, which profiles, product-holdin
 - **Little signal:** card type, satisfaction score, credit-card ownership, credit score and estimated salary.
 - **Highest-risk profile:** Germany · Inactive · 1 product · Aged 40–64 (**73%** churn).
 
-## ⚠️ Target Leakage: `Complain`
+## Target Leakage: `Complain`
 
 `Complain` matches `Exited` for **99.9%** of customers (99.5% of complainers left vs 0.05% of others). Adding it lifts test ROC-AUC from **0.870 to 0.999** — not because the model is better, but because it reads the outcome from a column that records it. `Complain` and `Satisfaction Score` are therefore **excluded from modelling**.
 
-## 🧭 Workflow
+## Workflow
 
 1. **Load & validate** — structure, types, missing values, duplicates, identifiers
 2. **Customer profile** — demographics, products, balances, card types
@@ -58,14 +58,14 @@ This project explores which bank customers leave, which profiles, product-holdin
 11. **Predictive modelling** — Logistic Regression vs Random Forest vs Gradient Boosting, 5-fold CV, threshold tuning on out-of-fold predictions, single held-out test evaluation
 12. **Business insights** — findings, recommendations, limitations
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **SQL (SQLite, in-memory):** segment aggregation, conditional aggregation, window functions, CTEs, risk scoring, a `v_customers` view
 - **Python:** pandas, NumPy, SciPy
 - **Visualisation:** Matplotlib, Seaborn
 - **Modelling:** scikit-learn (pipelines, cross-validation, permutation importance)
 
-## 💡 Recommendations
+## Recommendations
 
 | # | Action | Priority |
 |---|---|---|
@@ -77,21 +77,6 @@ This project explores which bank customers leave, which profiles, product-holdin
 | 6 | Use the risk score to rank outreach and measure save rate with a holdout group | Medium |
 | 7 | Confirm when `Complain` / `Satisfaction Score` are recorded before using them | Data task |
 
-## 🚀 How to Run
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/NurAlyaaJamal/<your-repo-name>.git
-cd <your-repo-name>
-
-# 2. Install dependencies (SQLite ships with Python)
-pip install pandas numpy scipy matplotlib seaborn scikit-learn jupyter
-
-# 3. Download Customer-Churn-Records.csv from Kaggle and place it in the project folder
-
-# 4. Launch the notebook
-jupyter notebook bank-customers-churn-analysis.ipynb
-```
 
 The notebook looks for the CSV at the Kaggle input path first, then falls back to local locations, so it also runs directly on Kaggle.
 
