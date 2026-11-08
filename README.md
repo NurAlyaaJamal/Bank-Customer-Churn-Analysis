@@ -80,7 +80,7 @@ This project explores which bank customers leave, which profiles, product-holdin
 
 The notebook looks for the CSV at the Kaggle input path first, then falls back to local locations, so it also runs directly on Kaggle.
 
-## 📝 Analysis Principles & Limitations
+## Analysis Principles & Limitations
 
 - Findings are **associations**, not proven causes. Validate with a controlled retention test (contact a random half of high-risk customers, hold back the rest).
 - Churn is compared as a **rate within each segment**, and statistical significance is read together with **effect size**.
@@ -88,9 +88,11 @@ The notebook looks for the CSV at the Kaggle input path first, then falls back t
 - Provenance is undocumented and some columns behave like simulated data — results **demonstrate the method** and are not evidence about a real bank.
 - Risk tiers were designed on the same data they describe (in-sample); model results use a held-out test set, which still carries sampling error.
 - The threshold maximises F1, not profit. The real cost of a missed churner vs a wasted contact should set the production threshold.
-- No currency is given, so amounts are shown as plain numbers.
 
-## 👩‍💻 Author
+## Author
 
 **Nur Alyaa Jamal**
+
+Bachelor of Science (Hons) (Industrial Statistics)
+
 [LinkedIn](https://www.linkedin.com/in/nur-alyaa-jamal13/) · [GitHub](https://github.com/NurAlyaaJamal) · nralyaajamal@gmail.com
